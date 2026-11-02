@@ -33,7 +33,7 @@ const theme: Theme = {
 export function RootNavigator() {
   return (
     <NavigationContainer theme={theme}>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{ animation: 'slide_from_right' }}>
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
         <Stack.Screen
           name="MovieDetails"
