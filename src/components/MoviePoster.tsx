@@ -25,8 +25,8 @@ function PosterImage({ movie }: MoviePosterProps) {
   // OMDb returns "N/A" when a movie has no poster.
   if (movie.Poster === 'N/A') {
     return (
-      <View className="h-40 w-28 items-center justify-center rounded-md bg-neutral-800 p-2">
-        <Text className="text-center text-xs text-neutral-300" numberOfLines={4}>
+      <View className="h-80 w-56 items-center justify-center rounded-md bg-neutral-800 p-2">
+        <Text className="text-center text-sm text-neutral-300" numberOfLines={4}>
           {movie.Title}
         </Text>
       </View>
@@ -34,6 +34,6 @@ function PosterImage({ movie }: MoviePosterProps) {
   }
 
   return (
-    <Image source={{ uri: movie.Poster }} className="h-40 w-28 rounded-md" resizeMode="cover" />
+    <Image source={{ uri: movie.Poster }} className="h-80 w-56 rounded-md" resizeMode="cover" />
   );
 }

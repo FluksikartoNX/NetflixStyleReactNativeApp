@@ -23,7 +23,7 @@ function MovieRowContent({ search }: { search: string }) {
 
   if (isPending) {
     return (
-      <View className="h-40 justify-center">
+      <View className="h-80 justify-center">
         <ActivityIndicator color="#E50914" />
       </View>
     );
