@@ -1,56 +1,90 @@
 # NetflixStyleReactNativeApp
 
-## 1. What to install (Windows)
+A Netflix-style movie browser built with Expo (SDK 58), React Native, TypeScript, NativeWind, TanStack Query and
+React Navigation. Movie data comes from the [OMDb API](https://www.omdbapi.com/). Runs on iOS and Android.
 
-You **do not** need Android Studio to get started.
+## 1. Setup (all platforms)
 
-1. **Node.js LTS**: https://nodejs.org/ (already installed if `node -v` works).
-2. **Git**: https://git-scm.com/download/win.
-3. **Expo Go on your Android phone**: https://play.google.com/store/apps/details?id=host.exp.exponent
-   (iPhone: https://apps.apple.com/app/expo-go/id982107779).
-4. **VS Code extensions** (VS Code suggests them when you open the folder): ESLint, Prettier,
-   Tailwind CSS IntelliSense, Expo Tools.
-
-Optional, only if you want an emulator on your PC instead of a real phone:
-
-5. **Android Studio**: https://developer.android.com/studio. Follow Expo's guide exactly:
-   https://docs.expo.dev/workflow/android-studio-emulator/ (installs the SDK, sets `ANDROID_HOME`, creates a virtual device).
-
-Optional, for later (building an installable APK or publishing):
-
-6. **Expo account** (free): https://expo.dev/signup. Used by EAS Build, which builds Android **and iOS** apps in the cloud,
-   so you never need a Mac: https://docs.expo.dev/build/setup/
-7. **Google Play Console** (one-time $25 fee): only when you want to publish to the Play Store:
-   https://play.google.com/console/signup
-
-## 2. Run the app
+Requires **Node.js LTS**: https://nodejs.org/ (check with `node -v`).
 
 ```bash
+git clone <repo-url>
+cd NetflixStyleReactNativeApp
 npm install
-npm start
 ```
 
-- **Phone:** make sure the phone and PC are on the same Wi-Fi, open Expo Go, and scan the QR code shown in the terminal.
-  If the connection fails (corporate Wi-Fi, firewall), run `npx expo start --tunnel`.
-- **Emulator:** start a virtual device in Android Studio, then press `a` in the terminal (or run `npm run android`).
+Create the `.env` file from the example (it holds the OMDb API URL and key):
 
-You should see a dark screen with "NETFLIX / Hello World" and the title of a post loaded through axios.
+```bash
+# macOS / Linux
+cp .env.example .env
 
-> If Expo Go says the project SDK is incompatible, update Expo Go from the store. If it still fails, see
-> https://expo.dev/go for the Expo Go version that matches SDK 58.
+# Windows (PowerShell)
+Copy-Item .env.example .env
+```
 
-## 3. Scripts
+## 2. Run on iOS
 
-| Command                | What it does                              |
-| ---------------------- | ----------------------------------------- |
-| `npm start`            | Start the Metro dev server (QR code)      |
-| `npm run android`      | Start and open on Android emulator/device |
-| `npm run lint`         | ESLint (including Prettier issues)        |
-| `npm run lint:fix`     | ESLint with autofix                       |
-| `npm run format`       | Format every file with Prettier           |
-| `npm run format:check` | Check formatting without changing files   |
-| `npm run typecheck`    | TypeScript check (`tsc --noEmit`)         |
-| `npm run doctor`       | Check Expo config and dependency versions |
+### Option A: real iPhone (no Mac needed, quickest)
+
+1. Install **Expo Go** from the App Store: https://apps.apple.com/app/expo-go/id982107779
+2. Run `npm start` on your computer.
+3. Make sure the iPhone and computer are on the same Wi-Fi, then scan the QR code in the terminal with the
+   **iPhone Camera app** and tap the banner to open it in Expo Go.
+
+If the phone can't connect (corporate Wi-Fi, firewall, VPN), use `npx expo start --tunnel` instead.
+
+### Option B: iOS Simulator (macOS only)
+
+1. Install **Xcode** from the Mac App Store: https://apps.apple.com/app/xcode/id497799835
+2. Open Xcode once and accept the license. When asked which platforms to install, select **iOS**
+   (or later: Xcode → Settings → Components → install the iOS Simulator runtime).
+3. Install the command line tools if prompted: `xcode-select --install`.
+4. Run:
+
+   ```bash
+   npm run ios
+   ```
+
+   This starts the dev server, boots the simulator, installs Expo Go in it and opens the app.
+   If the dev server is already running, press `i` in the terminal instead.
+
+Full guide: https://docs.expo.dev/workflow/ios-simulator/
+
+## 3. Run on Android
+
+### Option A: real Android phone
+
+1. Install **Expo Go** from Google Play: https://play.google.com/store/apps/details?id=host.exp.exponent
+2. Run `npm start`, then scan the QR code **from inside Expo Go** (same Wi-Fi as the computer).
+
+### Option B: Android emulator (Windows, macOS, Linux)
+
+1. Install **Android Studio**: https://developer.android.com/studio and follow Expo's setup guide
+   (installs the SDK, sets `ANDROID_HOME`, creates a virtual device):
+   https://docs.expo.dev/workflow/android-studio-emulator/
+2. Start the virtual device, then run `npm run android` (or press `a` in a running dev server).
+
+## Troubleshooting
+
+- **"Project is incompatible with this version of Expo Go"**: update Expo Go from the store. This project uses
+  **SDK 58**; see https://expo.dev/go for the matching Expo Go version.
+- **Changes to `.env` are not picked up**: restart with a cleared cache: `npx expo start -c`.
+- **Movies don't load / "Invalid API key"**: check that `.env` exists and contains `EXPO_PUBLIC_OMDB_API_KEY`.
+
+## Scripts
+
+| Command                | What it does                                     |
+| ---------------------- | ------------------------------------------------ |
+| `npm start`            | Start the Metro dev server (QR code)             |
+| `npm run ios`          | Start and open in the iOS Simulator (macOS only) |
+| `npm run android`      | Start and open on Android emulator/device        |
+| `npm run lint`         | ESLint (including Prettier issues)               |
+| `npm run lint:fix`     | ESLint with autofix                              |
+| `npm run format`       | Format every file with Prettier                  |
+| `npm run format:check` | Check formatting without changing files          |
+| `npm run typecheck`    | TypeScript check (`tsc --noEmit`)                |
+| `npm run doctor`       | Check Expo config and dependency versions        |
 
 Add new packages with `npx expo install <package>` instead of `npm install`. It picks versions compatible with the
 current Expo SDK.
@@ -58,7 +92,7 @@ current Expo SDK.
 ## Useful links
 
 - Expo docs: https://docs.expo.dev/
-- Expo tutorial: https://docs.expo.dev/tutorial/introduction/
 - React Native docs: https://reactnative.dev/docs/getting-started
 - NativeWind docs: https://www.nativewind.dev/
-- Navigation (you will need it for multiple screens): Expo Router: https://docs.expo.dev/router/introduction/
+- TanStack Query docs: https://tanstack.com/query/latest/docs/framework/react/overview
+- React Navigation docs: https://reactnavigation.org/docs/getting-started
