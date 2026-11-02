@@ -1,13 +1,14 @@
 import { AxiosError, create } from 'axios';
 
-// Variables prefixed with EXPO_PUBLIC_ are inlined at build time. See .env.example.
-// Note: on a physical device / Android emulator, "localhost" is NOT your PC.
-// Use your PC's LAN IP (e.g. http://192.168.1.10:3000) or 10.0.2.2 for the Android emulator.
-const API_URL = process.env.EXPO_PUBLIC_API_URL ?? 'https://jsonplaceholder.typicode.com';
+// Only variables prefixed with EXPO_PUBLIC_ are inlined at build time; others are undefined.
+// They must be read as `process.env.EXPO_PUBLIC_X` literally (no destructuring / dynamic keys).
+// Restart with `npx expo start -c` after changing .env. See .env.example.
+const API_URL = process.env.EXPO_PUBLIC_OMDB_API_URL;
+const API_KEY = process.env.EXPO_PUBLIC_OMDB_API_KEY;
 
 export const apiClient = create({
   baseURL: API_URL,
-  timeout: 15_000,
+  params: { apikey: API_KEY },
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',

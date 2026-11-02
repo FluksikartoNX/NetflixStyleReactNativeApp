@@ -85,8 +85,8 @@ files matched by `content` in `tailwind.config.js`, which already includes `./sr
 Use `className` on React Native components:
 
 ```tsx
-<View className="flex-1 items-center justify-center bg-background">
-  <Text className="text-2xl font-bold text-brand">Hello</Text>
+<View className="bg-background flex-1 items-center justify-center">
+  <Text className="text-brand text-2xl font-bold">Hello</Text>
 </View>
 ```
 
@@ -95,7 +95,7 @@ Custom colors (`brand`, `brand-dark`, `background`) live in `tailwind.config.js`
 
 ## 6. Calling an API
 
-1. Copy `.env.example` to `.env` and set `EXPO_PUBLIC_API_URL`.
+1. Copy `.env.example` to `.env` and set `OMDb_API` and `OMDb_API_KEY`.
 2. Add a service in `src/api/services/`:
 
 ```ts
