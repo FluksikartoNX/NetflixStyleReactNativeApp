@@ -1,6 +1,7 @@
 import { DarkTheme, NavigationContainer, type Theme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import { COLORS } from '../constants/colors';
 import { HomeScreen } from '../screens/HomeScreen';
 import { MovieDetailsScreen } from '../screens/MovieDetailsScreen';
 
@@ -24,16 +25,21 @@ const theme: Theme = {
   ...DarkTheme,
   colors: {
     ...DarkTheme.colors,
-    primary: '#E50914',
-    background: '#141414',
-    card: '#141414',
+    primary: COLORS.brand,
+    background: COLORS.background,
+    card: COLORS.background,
   },
 };
 
 export function RootNavigator() {
   return (
     <NavigationContainer theme={theme}>
-      <Stack.Navigator screenOptions={{ animation: 'slide_from_right' }}>
+      <Stack.Navigator
+        screenOptions={{
+          animation: 'slide_from_right',
+          contentStyle: { backgroundColor: COLORS.background },
+        }}
+      >
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
         <Stack.Screen
           name="MovieDetails"
